@@ -1,100 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Calculator App</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f2f2f2;
-      font-family: Arial;
-    }
-    .calculator {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 260px;
-      box-shadow: 0 0 10px gray;
-    }
-    input {
-      width: 100%;
-      height: 40px;
-      font-size: 20px;
-      text-align: right;
-      margin-bottom: 10px;
-    }
-    button {
-      width: 60px;
-      height: 50px;
-      font-size: 18px;
-      margin: 3px;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Calculator with History</title>
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  gap: 15px;
+}
+
+.calculator {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 15px;
+  width: 260px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+#display {
+  width: 100%;
+  height: 50px;
+  font-size: 24px;
+  text-align: right;
+  padding-right: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 55px;
+  height: 50px;
+  margin: 3px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.num { background: #333; color: white; }
+.op { background: #ff9500; color: white; }
+.eq { background: #34c759; color: white; width: 115px; }
+.clear { background: #ff3b30; color: white; }
+
+.history {
+  background: white;
+  border-radius: 15px;
+  width: 180px;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 360px;
+}
+
+.history h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.history p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+</style>
 </head>
 
 <body>
+
+<div class="container">
+
   <div class="calculator">
     <input type="text" id="display" readonly>
 
     <div>
-      <button onclick="clr()">C</button>
-      <button onclick="del()">DEL</button>
-      <button onclick="add('/')">/</button>
-      <button onclick="add('*')">*</button>
+      <button class="clear" onclick="clearAll()">C</button>
+      <button class="clear" onclick="del()">DEL</button>
+      <button class="op" onclick="add('/')">/</button>
+      <button class="op" onclick="add('*')">*</button>
     </div>
 
     <div>
-      <button onclick="add('7')">7</button>
-      <button onclick="add('8')">8</button>
-      <button onclick="add('9')">9</button>
-      <button onclick="add('-')">-</button>
+      <button class="num" onclick="add('7')">7</button>
+      <button class="num" onclick="add('8')">8</button>
+      <button class="num" onclick="add('9')">9</button>
+      <button class="op" onclick="add('-')">-</button>
     </div>
 
     <div>
-      <button onclick="add('4')">4</button>
-      <button onclick="add('5')">5</button>
-      <button onclick="add('6')">6</button>
-      <button onclick="add('+')">+</button>
+      <button class="num" onclick="add('4')">4</button>
+      <button class="num" onclick="add('5')">5</button>
+      <button class="num" onclick="add('6')">6</button>
+      <button class="op" onclick="add('+')">+</button>
     </div>
 
     <div>
-      <button onclick="add('1')">1</button>
-      <button onclick="add('2')">2</button>
-      <button onclick="add('3')">3</button>
-      <button onclick="calc()">=</button>
+      <button class="num" onclick="add('1')">1</button>
+      <button class="num" onclick="add('2')">2</button>
+      <button class="num" onclick="add('3')">3</button>
+      <button class="eq" onclick="calculate()">=</button>
     </div>
 
     <div>
-      <button onclick="add('0')">0</button>
-      <button onclick="add('.')">.</button>
+      <button class="num" onclick="add('0')">0</button>
+      <button class="num" onclick="add('.')">.</button>
     </div>
   </div>
 
-  <script>
-    let display = document.getElementById("display");
+  <div class="history">
+    <h3>History</h3>
+    <div id="historyList"></div>
+  </div>
 
-    function add(value) {
-      display.value += value;
-    }
+</div>
 
-    function clr() {
-      display.value = "";
-    }
+<script>
+let display = document.getElementById("display");
+let historyList = document.getElementById("historyList");
 
-    function del() {
-      display.value = display.value.slice(0, -1);
-    }
+function add(val) {
+  display.value += val;
+}
 
-    function calc() {
-      try {
-        display.value = eval(display.value);
-      } catch {
-        display.value = "Error";
-      }
-    }
-  </script>
+function clearAll() {
+  display.value = "";
+}
+
+function del() {
+  display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    let expression = display.value;
+    let result = eval(expression);
+    display.value = result;
+
+    saveHistory(expression + " = " + result);
+  } catch {
+    display.value = "Error";
+  }
+}
+
+function saveHistory(entry) {
+  let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+  history.unshift(entry);
+  localStorage.setItem("calcHistory", JSON.stringify(history));
+  showHistory();
+}
+
+function showHistory() {
+  historyList.innerHTML = "";
+  let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+  history.forEach(item => {
+    let p = document.createElement("p");
+    p.textContent = item;
+    historyList.appendChild(p);
+  });
+}
+
+showHistory();
+</script>
+
 </body>
 </html>
