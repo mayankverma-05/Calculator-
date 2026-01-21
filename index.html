@@ -151,6 +151,17 @@ function calculate() {
     display.value = "Error";
   }
 }
+  function sqrt() {
+  try {
+    let value = eval(display.value);
+    let result = Math.sqrt(value);
+    display.value = result;
+    saveHistory("√(" + value + ") = " + result);
+  } catch {
+    display.value = "Error";
+  }
+  }
+  
 
 function saveHistory(entry) {
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
