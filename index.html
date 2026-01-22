@@ -231,6 +231,21 @@ function showHistory() {
 }
 
 showHistory();
+  showHistory();
+function toggleTheme() {
+  document.body.classList.toggle("light");
+
+  let btn = document.getElementById("themeBtn");
+  if (document.body.classList.contains("light")) {
+    btn.innerText = "🌞 Light";
+    localStorage.setItem("theme", "light");
+  } else {
+    btn.innerText = "🌙 Dark";
+    localStorage.setItem("theme", "dark");
+  }
+}
+</script>
+  
 </script>
 
 </body>
