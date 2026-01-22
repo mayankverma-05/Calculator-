@@ -244,6 +244,30 @@ function toggleTheme() {
     localStorage.setItem("theme", "dark");
   }
 }
+  
+document.addEventListener("keydown", function (e) {
+
+  if (e.key >= "0" && e.key <= "9") add(e.key);
+
+  if (e.key === "+") add("+");
+  if (e.key === "-") add("-");
+  if (e.key === "*") add("*");
+  if (e.key === "/") add("/");
+
+  if (e.key === ".") add(".");
+
+  if (e.key === "Enter") {
+    e.preventDefault();
+    calculate();
+  }
+
+  if (e.key === "Backspace") del();
+
+  if (e.key === "Delete") clearAll();
+
+  if (e.key === "r" || e.key === "R") sqrt();
+});
+  
 </script>
   
 </script>
