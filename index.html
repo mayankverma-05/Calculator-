@@ -232,6 +232,11 @@ function showHistory() {
 }
 
 showHistory();
+  function clearHistory() {
+  localStorage.removeItem("calcHistory");
+  historyList.innerHTML = "";
+  }
+  
   showHistory();
 function toggleTheme() {
   document.body.classList.toggle("light");
