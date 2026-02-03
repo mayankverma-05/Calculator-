@@ -134,9 +134,9 @@ body.light .eq {
   <button class="clear" onclick="clearAll()">C</button>
   <button class="clear" onclick="del()">DEL</button>
   <button class="op" onclick="sqrt()">√</button>
- <button class="op" onclick="calcsin()">sin</button>
-<button class="op" onclick="calccos()">cos</button>
-<button class="op" onclick="calctan()">tan</button>
+ <button class="op" onclick="calcSin()">sin</button>
+<button class="op" onclick="calcCos()">cos</button>
+<button class="op" onclick="calcTan()">tan</button>
       
   <button class="op" onclick="add('/')">/</button>
   <button class="op" onclick="add('*')">*</button>
@@ -228,19 +228,7 @@ function calculate() {
   }
 }
   function sqrt() {
-  try {
-    let value = eval(display.value);
-    let result = Math.sqrt(value);
-    display.value = result;
-    saveHistory("√(" + value + ") = " + result);
-  } catch {
-    display.value = "Error";
-  }
-  }
-  
-  
-  
-  try {
+   try {
     let value = eval(display.value);
     let result = Math.sqrt(value);
     display.value = result;
