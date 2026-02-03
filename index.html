@@ -207,38 +207,16 @@ function calculate() {
   }
 }
   function sqrt() {
-    function calcsin() {
   try {
     let value = eval(display.value);
-    let result = Math.sin(value * Math.PI / 180);
+    let result = Math.sqrt(value);
     display.value = result;
-    saveHistory("sin(" + value + ") = " + result);
-  } catch {
-    display.value = "Error";
-  }
-}
-
-function calccos() {
-  try {
-    let value = eval(display.value);
-    let result = Math.cos(value * Math.PI / 180);
-    display.value = result;
-    saveHistory("cos(" + value + ") = " + result);
-  } catch {
-    display.value = "Error";
-  }
-}
-
-function calctan() {
-  try {
-    let value = eval(display.value);
-    let result = Math.tan(value * Math.PI / 180);
-    display.value = result;
-    saveHistory("tan(" + value + ") = " + result);
+    saveHistory("√(" + value + ") = " + result);
   } catch {
     display.value = "Error";
   }
   }
+  
   
   
   try {
