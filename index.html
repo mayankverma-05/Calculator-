@@ -180,6 +180,27 @@ body.light .eq {
 </div>
 
 <script>
+  function calcSin() {
+  let value = eval(display.value);
+  let result = Math.sin(value * Math.PI / 180);
+  display.value = result;
+  saveHistory("sin(" + value + ") = " + result);
+}
+
+function calcCos() {
+  let value = eval(display.value);
+  let result = Math.cos(value * Math.PI / 180);
+  display.value = result;
+  saveHistory("cos(" + value + ") = " + result);
+}
+
+function calcTan() {
+  let value = eval(display.value);
+  let result = Math.tan(value * Math.PI / 180);
+  display.value = result;
+  saveHistory("tan(" + value + ") = " + result);
+  }
+  
 let display = document.getElementById("display");
 let historyList = document.getElementById("historyList");
 
