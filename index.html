@@ -210,7 +210,7 @@ function calculate() {
     function calcsin() {
   try {
     let value = eval(display.value);
-    let result = Math.sin(value * Math.PI / 180); // degree → radian
+    let result = Math.sin(value * Math.PI / 180);
     display.value = result;
     saveHistory("sin(" + value + ") = " + result);
   } catch {
@@ -239,6 +239,7 @@ function calctan() {
     display.value = "Error";
   }
   }
+  
   
   try {
     let value = eval(display.value);
