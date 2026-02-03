@@ -134,9 +134,9 @@ body.light .eq {
   <button class="clear" onclick="clearAll()">C</button>
   <button class="clear" onclick="del()">DEL</button>
   <button class="op" onclick="sqrt()">√</button>
- <button class="op" onclick="Calcsin()">sin</button>
-<button class="op" onclick="Calccos()">cos</button>
-<button class="op" onclick="Calctan()">tan</button>
+ <button class="op" onclick="calcsin()">sin</button>
+<button class="op" onclick="calccos()">cos</button>
+<button class="op" onclick="calctan()">tan</button>
       
   <button class="op" onclick="add('/')">/</button>
   <button class="op" onclick="add('*')">*</button>
@@ -207,7 +207,7 @@ function calculate() {
   }
 }
   function sqrt() {
-    function Calcsin() {
+    function calcsin() {
   try {
     let value = eval(display.value);
     let result = Math.sin(value * Math.PI / 180); // degree → radian
@@ -218,7 +218,7 @@ function calculate() {
   }
 }
 
-function Calccos() {
+function calccos() {
   try {
     let value = eval(display.value);
     let result = Math.cos(value * Math.PI / 180);
@@ -229,7 +229,7 @@ function Calccos() {
   }
 }
 
-function Calctan() {
+function calctan() {
   try {
     let value = eval(display.value);
     let result = Math.tan(value * Math.PI / 180);
@@ -309,6 +309,10 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Delete") clearAll();
 
   if (e.key === "r" || e.key === "R") sqrt();
+    if (e.key === "s" || e.key === "S") calcSin();
+  if (e.key === "c" || e.key === "C") calcCos();
+  if (e.key === "t" || e.key === "T") calcTan();
+  
 });
   
 </script>
