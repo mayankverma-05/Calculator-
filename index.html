@@ -207,6 +207,39 @@ function calculate() {
   }
 }
   function sqrt() {
+    function sin() {
+  try {
+    let value = eval(display.value);
+    let result = Math.sin(value * Math.PI / 180); // degree → radian
+    display.value = result;
+    saveHistory("sin(" + value + ") = " + result);
+  } catch {
+    display.value = "Error";
+  }
+}
+
+function cos() {
+  try {
+    let value = eval(display.value);
+    let result = Math.cos(value * Math.PI / 180);
+    display.value = result;
+    saveHistory("cos(" + value + ") = " + result);
+  } catch {
+    display.value = "Error";
+  }
+}
+
+function tan() {
+  try {
+    let value = eval(display.value);
+    let result = Math.tan(value * Math.PI / 180);
+    display.value = result;
+    saveHistory("tan(" + value + ") = " + result);
+  } catch {
+    display.value = "Error";
+  }
+  }
+  
   try {
     let value = eval(display.value);
     let result = Math.sqrt(value);
