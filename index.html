@@ -317,6 +317,34 @@ function saveHistory(entry) {
   recognition.start();
 }
 
+// Agar browser Safari/Chrome WebKit me ho
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+
+recognition.continuous = true;  // continuous listening
+recognition.lang = "hi-IN";      // Hindi (agar chaho to change)
+
+recognition.onresult = function(event) {
+  const current = event.resultIndex;
+  const transcript = event.results[current][0].transcript;
+  document.getElementById("result").value += transcript;
+};
+
+// Start voice input (agar already hai)
+function startVoice() {
+  recognition.start();
+}
+
+// Stop voice input function
+function stopVoice() {
+  recognition.stop();
+}
+
+document.getElementById("stopVoice").addEventListener("click", function() {
+  stopVoice();
+  alert("Voice input stopped ✅");
+});
+  
 function showHistory() {
   historyList.innerHTML = "";
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
