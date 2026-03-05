@@ -246,6 +246,43 @@ function saveHistory(entry) {
   localStorage.setItem("calcHistory", JSON.stringify(history));
   showHistory();
 }
+  function startVoice() {
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+
+  recognition.onresult = function(event) {
+    let speech = event.results[0][0].transcript.toLowerCase();
+
+    // 🔹 Operators conversion
+    speech = speech
+      .replace(/plus/g, "+")
+      .replace(/minus/g, "-")
+      .replace(/multiply|multiplied by/g, "*")
+      .replace(/divide|divided by/g, "/");
+
+    // 🔹 Numbers words conversion (Option 1)
+    speech = speech
+      .replace(/zero/g,"0")
+      .replace(/one/g,"1")
+      .replace(/two/g,"2")
+      .replace(/three/g,"3")
+      .replace(/four/g,"4")
+      .replace(/five/g,"5")
+      .replace(/six/g,"6")
+      .replace(/seven/g,"7")
+      .replace(/eight/g,"8")
+      .replace(/nine/g,"9");
+
+    // Display the converted expression
+    display.value = speech;
+
+    // Optional: automatic calculation
+    // Uncomment below line if you want result immediately
+    // calculate();
+  };
+
+  recognition.start();
+}
 
 function showHistory() {
   historyList.innerHTML = "";
