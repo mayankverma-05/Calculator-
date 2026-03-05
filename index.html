@@ -38,7 +38,30 @@ body {
   border-radius: 10px;
   margin-bottom: 10px;
 }
+  #voiceBtn {
+  width: 100%;
+  height: 45px;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
 
+/* Hover effect */
+#voiceBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Active / pressed effect */
+#voiceBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
 button {
   width: 55px;
   height: 50px;
