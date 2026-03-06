@@ -278,7 +278,7 @@ function saveHistory(entry) {
   history.unshift(entry);
   localStorage.setItem("calcHistory", JSON.stringify(history));
   showHistory();
-  }
+}
   // 🎤 VOICE RECOGNITION FIXED
 
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
