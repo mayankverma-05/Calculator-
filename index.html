@@ -278,63 +278,48 @@ function saveHistory(entry) {
   history.unshift(entry);
   localStorage.setItem("calcHistory", JSON.stringify(history));
   showHistory();
-}
-  function startVoice() {
-  const recognition = new webkitSpeechRecognition();
-  recognition.lang = "en-US";
+  }
+  // 🎤 VOICE RECOGNITION FIXED
 
-  recognition.onresult = function(event) {
-    let speech = event.results[0][0].transcript.toLowerCase();
-
-    // 🔹 Operators conversion
-    speech = speech
-      .replace(/plus/g, "+")
-      .replace(/minus/g, "-")
-      .replace(/multiply|multiplied by/g, "*")
-      .replace(/divide|divided by/g, "/");
-
-    // 🔹 Numbers words conversion (Option 1)
-    speech = speech
-      .replace(/zero/g,"0")
-      .replace(/one/g,"1")
-      .replace(/two/g,"2")
-      .replace(/three/g,"3")
-      .replace(/four/g,"4")
-      .replace(/five/g,"5")
-      .replace(/six/g,"6")
-      .replace(/seven/g,"7")
-      .replace(/eight/g,"8")
-      .replace(/nine/g,"9");
-
-    // Display the converted expression
-    display.value = speech;
-
-    // Optional: automatic calculation
-    // Uncomment below line if you want result immediately
-    // calculate();
-  };
-
-  recognition.start();
-}
-
-// Agar browser Safari/Chrome WebKit me ho
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
 
-recognition.continuous = true;  // continuous listening
-recognition.lang = "hi-IN";      // Hindi (agar chaho to change)
+recognition.lang = "en-US";
+recognition.continuous = false;
 
 recognition.onresult = function(event) {
-  const current = event.resultIndex;
-  const transcript = event.results[current][0].transcript;
-  document.getElementById("result").value = +-transcript; 
 
-// Stop voice input function
+  let speech = event.results[0][0].transcript.toLowerCase();
+
+  speech = speech
+    .replace(/plus/g, "+")
+    .replace(/minus/g, "-")
+    .replace(/multiply|multiplied by/g, "*")
+    .replace(/divide|divided by/g, "/")
+    .replace(/zero/g,"0")
+    .replace(/one/g,"1")
+    .replace(/two/g,"2")
+    .replace(/three/g,"3")
+    .replace(/four/g,"4")
+    .replace(/five/g,"5")
+    .replace(/six/g,"6")
+    .replace(/seven/g,"7")
+    .replace(/eight/g,"8")
+    .replace(/nine/g,"9");
+
+  display.value = speech;
+};
+
+function startVoice() {
+  recognition.start();
+}
+
 function stopVoice() {
   recognition.stop();
 }
 
-document.getElementById("stopVoice").addEventListener("click", function() {
+document.getElementById("stopVoice").addEventListener("click", stopVoice);
+  ("click", function() {
   stopVoice();
   alert("Voice input stopped ✅");
 });
