@@ -327,13 +327,7 @@ recognition.lang = "hi-IN";      // Hindi (agar chaho to change)
 recognition.onresult = function(event) {
   const current = event.resultIndex;
   const transcript = event.results[current][0].transcript;
-  document.getElementById("result").value += transcript;
-};
-
-// Start voice input (agar already hai)
-function startVoice() {
-  recognition.start();
-}
+  document.getElementById("result").value = +-transcript; 
 
 // Stop voice input function
 function stopVoice() {
