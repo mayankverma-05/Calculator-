@@ -335,6 +335,11 @@ document.getElementById("stopVoice").addEventListener("click", stopVoice);
   stopVoice();
   alert("Voice input stopped ✅");
 });
+  document.getElementById("equal").addEventListener("click", async () => {
+    let expr = document.getElementById("display").value;
+    let result = await calculateExpression(expr);
+    document.getElementById("display").value = result;
+});
   
 function showHistory() {
   historyList.innerHTML = "";
